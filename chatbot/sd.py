@@ -37,8 +37,8 @@ def generate_image():
     payload = {
         "input": {
             "api_name": "txt2img",
-            "prompt": f"best quality, beautiful, 23-year-old Lebanese girl, long brown hair, ((large breast)), sexy look, (titfuck), (pink bra:1.2), (Egypt at night, Ocean view:1.2) <lora:titfuck:0.8>",
-            "negative_prompt": "bad-hands-5, bad-artist, watermark, twin, second person",
+            "prompt": "best quality, beautiful, 23-year-old Lebanese girl, long brown hair, missionary vaginal, from above, yes (black stockings:1.2), beautiful pink pussy, spreading legs (Peru:1.2) <lora:POVMissionaryVaginal:0.8>",
+            "negative_prompt": "(deformed iris, deformed pupils, semi-realistic, cgi, 3d, render, sketch, cartoon, drawing, anime, mutated hands and fingers:1.4), (deformed, distorted, disfigured:1.3), poorly drawn, bad anatomy, wrong anatomy, extra limb, missing limb, floating limbs, disconnected limbs, mutation, mutated, ugly, disgusting, amputation",
             "width": 700,
             "height": 700,
             "guidance_scale": 7,

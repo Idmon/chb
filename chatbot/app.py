@@ -176,10 +176,11 @@ def get_face(url):
 def generate_image(image_instructions):
 
     prompt, negPrompt, face =  agent_character['agent'].construct_prompt(image_instructions)
-    print(prompt)
+    print(negPrompt)
+    print(face)
 
+    base64_face = get_face(face)
     args=[
-        base64_face = get_face(face)
         base64_face, #0
         True #1 Enable ReActor
     ]
