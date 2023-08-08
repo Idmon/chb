@@ -29,15 +29,20 @@ def generate_image():
 
     args=[
         base64_face, #0
-        True #1 Enable ReActor
+        True, #1 Enable ReActor
+        '0', #2 Comma separated face number(s) from swap-source image
+        '0', #3 Comma separated face number(s) for target image (result)
+        '/stable-diffusion-webui/models/roop/inswapper_128.onnx', #4 model path
+        'CodeFormer', #4 Restore Face: None; CodeFormer; GFPGAN
+        1, #5 Restore visibility value
+        True, #7 Restore face -> Upscale
     ]
-
-
+    
     url = "https://api.runpod.ai/v2/shhdv5w58hhanm/runsync"
     payload = {
         "input": {
             "api_name": "txt2img",
-            "prompt": "frontdoggy, 1girl, 1boy, breasts, nipples, hetero, sex, sex from behind, all fours, doggystyle <lora:doggystylefront:1>",
+            "prompt": "best quality, beautiful, 23-year-old Lebanese supermodel, full body, long brown hair,  wearing (Olympian dress), tanding in a modern minimalist (mount lympus), perfect face, perfect lighting, intricate, incredible detail, masterpiece, professional photoshoot",
             "negative_prompt": "(deformed iris, deformed pupils, semi-realistic, cgi, 3d, render, sketch, cartoon, drawing, anime, mutated hands and fingers:1.4), (deformed, distorted, disfigured:1.3), poorly drawn, bad anatomy, wrong anatomy, extra limb, missing limb, floating limbs, disconnected limbs, mutation, mutated, ugly, disgusting, amputation",
             "width": 512,
             "height": 512,
@@ -46,12 +51,12 @@ def generate_image():
             "num_outputs": 1,
             "prompt_strength": 1,
             "scheduler": "DPM++ 2M Karras",
-            "Face restoration": "CodeFormer",
-            "enable_hr": False,
-            "Denoising strength": 0.3,
-            "Hires upscale": 1.5,
-            "Hires upscaler": "superscale",
-            "Hires steps": 30,
+            # "Face restoration": "CodeFormer",
+            "enable_hr": True,
+            "denoising_strength": 0.3,
+            "hires_upscale": 1.25,
+            "hires_upscaler": "superscale",
+            "hires_steps": 30,
             "alwayson_scripts": {
                 "reactor":{
                     "args":args

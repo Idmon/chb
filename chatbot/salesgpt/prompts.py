@@ -90,6 +90,6 @@ def escape_string(s: str) -> str:
     print(escaped_str.strip('\\n').replace('"', '\\"'))
 
 
-escape_string(SALES_AGENT_TOOLS_PROMPT)
+#escape_string(SALES_AGENT_TOOLS_PROMPT)
 
    

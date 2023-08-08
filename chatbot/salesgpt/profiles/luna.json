@@ -26,28 +26,52 @@
   ],
   "image_options": {
     "outfit": {
-        "description": "normal sfw photo with clothes, OUTFIT photo, based on LOCATION",
-        "input": ["location", "outfit"],
-        "prompt": "best quality, beautiful, 23-year-old model, full body, long brown hair, wearing ({outfit}), standing in a modern minimalist {location}, perfect face, perfect lighting, intricate, incredible detail, masterpiece, professional photoshoot",
-        "negative_prompt": "watermark, (deformed iris, deformed pupils, semi-realistic, cgi, 3d, render, sketch, cartoon, drawing, anime, mutated hands and fingers:1.4), (deformed, distorted, disfigured:1.3), poorly drawn, bad anatomy, wrong anatomy, extra limb, missing limb, floating limbs, disconnected limbs, mutation, mutated, ugly, disgusting, amputation"
+      "description": "normal sfw photo with clothes, OUTFIT photo, based on LOCATION",
+      "input": ["location", "outfit"],
+      "prompt": "best quality, beautiful, 23-year-old Lebanese supermodel, full body, long brown hair,  wearing ({outfit}), tanding in a modern minimalist {location}, perfect face, perfect lighting, intricate, incredible detail, masterpiece, professional photoshoot",
+      "negative_prompt": "watermark, (deformed iris, deformed pupils, semi-realistic, cgi, 3d, render, sketch, cartoon, drawing, anime, mutated hands and fingers:1.4), (deformed, distorted, disfigured:1.3), poorly drawn, bad anatomy, wrong anatomy, extra limb, missing limb, floating limbs, disconnected limbs, mutation, mutated, ugly, disgusting, amputation"
     },
-    "casualHangout": {
-        "description": "sfw friendly photo of your virtual girlfriend in a casual setting, relaxed, approachable and inviting.",
-        "input": ["location", "outfit"],
-        "prompt": "best quality, beautiful, 23-year-old supermodel, full body, long brown hair, wearing ({outfit}), lounging in a cozy {location}, inviting smile, radiant energy, perfect lighting, intricate, incredible detail, masterpiece, professional photoshoot.",
-        "negative_prompt": "watermark, (deformed iris, deformed pupils, semi-realistic, cgi, 3d, render, sketch, cartoon, drawing, anime, mutated hands and fingers:1.4), (deformed, distorted, disfigured:1.3), poorly drawn, bad anatomy, wrong anatomy, extra limb, missing limb, floating limbs, disconnected limbs, mutation, mutated, ugly, disgusting, amputation"
-    },
-    "gymWorkout": {
-        "description": "sfw friendly photo capturing a moment from a gym workout, portraying strength, determination, and beauty.",
-        "input": ["location", "outfit"],
-        "prompt": "best quality, vibrant, 23-year-old supermodel, full body, long brown hair tied in a ponytail, wearing ({outfit}), in a well-equipped {location}, showing off a healthy physique, sweating lightly, focused expression, perfect lighting, intricate, incredible detail, masterpiece, professional photoshoot.",
-        "negative_prompt": "watermark, (deformed iris, deformed pupils, semi-realistic, cgi, 3d, render, sketch, cartoon, drawing, anime, mutated hands and fingers:1.4), (deformed, distorted, disfigured:1.3), poorly drawn, bad anatomy, wrong anatomy, extra limb, missing limb, floating limbs, disconnected limbs, mutation, mutated, ugly, disgusting, amputation"
+    "sexymirrorselfie": {
+      "description": "normal sfw photo with clothes, sexy mirror selfie wearing OUTFIT, based on LOCATION",
+      "input": [],
+      "prompt": "(RAW photo, best quality), (realistic, photo-realistic:1.4), masterpiece, extremely delicate and beautiful,Amazing, finely detail, extremely detailed CG unity 8k wallpaper, huge filesize, ultra-detailed, highres, absurdres, soft light,rim light, vibrant details, ((perfect hand:1.2)),((perfect leg:1.2)), blurry background, blurry foreground, depth of field, Take a selfie with phone in one hand and cover face, 1girl,solo,full body, ((sexy)),pantyhose, iphone, selfie, pose,small hand, <lora:sexymirrorselfie:0.6>",
+      "negative_prompt": "(breasts outside:1.8), ((nude:1.2)),nipples,((cross-eyed)), (monochrome:1.3), (oversaturated:1.3), lowers, 3d render, cartoon, (worst quality:2), (low quality:2), (normal quality:2), poor quality, duplicate, (poorly drawn), boring, mutated, artifacts, bad art, gross, ugly, paintings, sketches, low-res, ((grayscale)), skin spots, acnes, skin blemishes, age spot, logo, signature, text, words, long body,long neck,cross-eyed,((duplicate body parts)), (disfigured), (twisted),fused fingers, malformed hands, ((((mutated hands ,mutated fingers)))), contorted, conjoined, ((missing limbs)),two buttholes, (extra limbs),extra fingers, extra arms,extra legs, ((missing limbs)),missing asshole, missing fingers, missing leg,missing feet, bad feet,bad hands,bad fingers,bad body,bad proportions, too many fingers,fewer fingers, strange fingers, bad hand, bad anatomy, fused fingers, malformed limbs, tilted head, fewer digits,extra digit, lowres, error, poorly drawn hands,poorly drawn face, cropped,mutation,deformed,jpeg artifacts,watermark"
     },
     "standingnaked": {
       "description": "nsfw erotic photo, standing naked, OUTFIT photo, based on LOCATION",
       "input": ["location", "outfit"],
-      "prompt": "({scene}), wearing {clothing} porno, nfsw, sex, coitus, photo of onlyfans girl, young woman, hasselblad H6D, natural lighting, oiled pale skin, long eye lashes, detailed skin texture, (blush:0.5), (goosebumps:0.5), subsurface scattering, RAW candid cinema, remarkable color, ultra realistic, textured skin,  realistic dull skin noise, visible skin detail, skin fuzz, dry skin, shot with cinematic camera, best composition, profesional color graded, realistic skin detail, re-touched, Enchanting sexyness",
+      "prompt": "({location}), wearing {clothing} porno, nfsw, sex, coitus, photo of onlyfans girl, young woman, hasselblad H6D, natural lighting, oiled pale skin, long eye lashes, detailed skin texture, (blush:0.5), (goosebumps:0.5), subsurface scattering, RAW candid cinema, remarkable color, ultra realistic, textured skin,  realistic dull skin noise, visible skin detail, skin fuzz, dry skin, shot with cinematic camera, best composition, profesional color graded, realistic skin detail, re-touched, Enchanting sexyness",
       "negative_prompt": "watermark, (deformed iris, deformed pupils, semi-realistic, cgi, 3d, render, sketch, cartoon, drawing, anime, mutated hands and fingers:1.4), (deformed, distorted, disfigured:1.3), poorly drawn, bad anatomy, wrong anatomy, extra limb, missing limb, floating limbs, disconnected limbs, mutation, mutated, ugly, disgusting, amputation"
+    },
+    "lingerie": {
+      "description": "nsfw erotic photo, wearing lingerie based on COLOR (default=black), based on LOCATION",
+      "input": ["location", "color"],
+      "prompt": "lebanese girl, long brown hair, beautiful face, (small perky breasts), fullbody, symmetric eyes, Masterpiece, absurdres,HDR,8k,excited,smirking,best quality, Open_Lingerie, {color} crotchless lingerie, woman wearing the Open_Lingerie, sitting down, front view, ({location}:1.2) <lora:openlingerie:1>",
+      "negative_prompt": "big breast, (low quality, worst quality:1.4), ((disfigured)), ((bad art)), ((deformed)),((extra limbs)),((close up)),((b&w)), wierd colors, blurry, (((duplicate))), ((morbid)), ((mutilated)), [out of frame], (((extra fingers, mutated hands))), ((poorly drawn hands)), ((poorly drawn face)), (((mutation))), (((deformed))), ((ugly)), blurry, ((bad anatomy)), (((bad proportions))), ((extra limbs)), cloned face, (((disfigured))), out of frame, ugly, extra limbs, (bad anatomy), gross proportions, (malformed limbs), ((missing arms)), ((missing legs)), (((extra arms))), (((extra legs))), mutated hands, (fused fingers), (too many fingers), (((long neck))), Photoshop, video game, ugly, tiling, poorly drawn hands, poorly drawn feet, poorly drawn face, out of frame, mutation, mutated, extra limbs, extra legs, extra arms, disfigured, deformed, cross-eye, body out of frame, blurry, bad art, bad anatomy,(((UGLY DEFORMED HANDS))),(((holding, bag, purse))),(((elf ears)))"
+    },
+    "microbikini": {
+      "description": "nsfw erotic photo, wearing micro bikini (micro-kini) based on COLOR (default=black), based on LOCATION",
+      "input": ["location", "color"],
+      "prompt": "1girl, solo, full body shot, masterpiece, best quality, (photorealistic:1.4), beautiful majestic view, a photo of a beautiful lebanese woman, standing, long brown hair, textured hair hairstyle, (night:1.1), smiling, perfect face, detailed face, bright {color} micro bikini, ({location}:1.2) <lora:microbikini:1>",
+      "negative_prompt": "big breast, (low quality, worst quality:1.4), ((disfigured)), ((bad art)), ((deformed)),((extra limbs)),((close up)),((b&w)), wierd colors, blurry, (((duplicate))), ((morbid)), ((mutilated)), [out of frame], (((extra fingers, mutated hands))), ((poorly drawn hands)), ((poorly drawn face)), (((mutation))), (((deformed))), ((ugly)), blurry, ((bad anatomy)), (((bad proportions))), ((extra limbs)), cloned face, (((disfigured))), out of frame, ugly, extra limbs, (bad anatomy), gross proportions, (malformed limbs), ((missing arms)), ((missing legs)), (((extra arms))), (((extra legs))), mutated hands, (fused fingers), (too many fingers), (((long neck))), Photoshop, video game, ugly, tiling, poorly drawn hands, poorly drawn feet, poorly drawn face, out of frame, mutation, mutated, extra limbs, extra legs, extra arms, disfigured, deformed, cross-eye, body out of frame, blurry, bad art, bad anatomy,(((UGLY DEFORMED HANDS))),(((holding, bag, purse))),(((elf ears)))"
+    },
+    "bondageplay": {
+      "description": "nsfw erotic photo, wearing rope, bdsm, bondage play, based on COLOR (default=black), based on LOCATION",
+      "input": ["location", "color"],
+      "prompt": "lebanese girl, long brown hair, beautiful face, (small perky breasts), fullbody, symmetric eyes, Hasselblad H6, Masterpiece, absurdres,HDR,8k,excited,smirking,best quality,  hentai ropebondage, bdsm, {color} crotch rope, bound legs,breast bondage, bound arms , hand up, ahegao, spread legs, ({location}:1.2)   <lora:bondageplay:0.8>",
+      "negative_prompt": "big breast, (low quality, worst quality:1.4), ((disfigured)), ((bad art)), ((deformed)),((extra limbs)),((close up)),((b&w)), wierd colors, blurry, (((duplicate))), ((morbid)), ((mutilated)), [out of frame], (((extra fingers, mutated hands))), ((poorly drawn hands)), ((poorly drawn face)), (((mutation))), (((deformed))), ((ugly)), blurry, ((bad anatomy)), (((bad proportions))), ((extra limbs)), cloned face, (((disfigured))), out of frame, ugly, extra limbs, (bad anatomy), gross proportions, (malformed limbs), ((missing arms)), ((missing legs)), (((extra arms))), (((extra legs))), mutated hands, (fused fingers), (too many fingers), (((long neck))), Photoshop, video game, ugly, tiling, poorly drawn hands, poorly drawn feet, poorly drawn face, out of frame, mutation, mutated, extra limbs, extra legs, extra arms, disfigured, deformed, cross-eye, body out of frame, blurry, bad art, bad anatomy,(((UGLY DEFORMED HANDS))),(((holding, bag, purse))),(((elf ears)))"
+    },
+    "pantiesPulledasideFuck": {
+      "description": "cowgirl, panties still wearing, panties pulled aside, based on LOCATION",
+      "input": ["location"],
+      "prompt": "best quality, beautiful, 23-year-old Lebanese girl, long brown hair, panties pulled aside fuck, ({location}:1.2) <lora:pantiesPulledasideFuck:0.8>",
+      "negative_prompt": "(breasts outside:1.8), ((nude:1.2)),nipples,((cross-eyed)), (monochrome:1.3), (oversaturated:1.3), lowers, 3d render, cartoon, (worst quality:2), (low quality:2), (normal quality:2), poor quality, duplicate, (poorly drawn), boring, mutated, artifacts, bad art, gross, ugly, paintings, sketches, low-res, ((grayscale)), skin spots, acnes, skin blemishes, age spot, logo, signature, text, words, long body,long neck,cross-eyed,((duplicate body parts)), (disfigured), (twisted),fused fingers, malformed hands, ((((mutated hands ,mutated fingers)))), contorted, conjoined, ((missing limbs)),two buttholes, (extra limbs),extra fingers, extra arms,extra legs, ((missing limbs)),missing asshole, missing fingers, missing leg,missing feet, bad feet,bad hands,bad fingers,bad body,bad proportions, too many fingers,fewer fingers, strange fingers, bad hand, bad anatomy, fused fingers, malformed limbs, tilted head, fewer digits,extra digit, lowres, error, poorly drawn hands,poorly drawn face, cropped,mutation,deformed,jpeg artifacts,watermark"
+    },
+    "doggystyleFront": {
+      "description": "front view doggystyle, doggy, doggy style, sex from behind, based on LOCATION",
+      "input": ["location"],
+      "prompt": "best quality, beautiful, 23-year-old Lebanese girl, long brown hair, frontdoggy, 1girl, 1boy, breasts, nipples, hetero, sex, sex from behind, all fours, doggystyle, ({location}:1.2) <lora:doggystylefront:1>",
+      "negative_prompt": "extra fingers, fewer fingers, missing fingers, extra digit, fewer digits, ng_deepnegative_v1_75t, hairy, pubic hair, head cut off, EasyNegative, paintings, sketches, (worst quality:2), (low quality:2), (normal quality:2), ((monochrome)), ((grayscale)), skin spots, acnes, skin blemishes, age spot, glans, ((watermark:2)),(white letters:1), (multi nipples), text, error, cropped, jpeg artifacts, signature, watermark, username, bad feet, Multiple people, mutation, deformed, long neck, cross-eyed, mutated hands, extra hands, bad body, bad proportions, missing legs, missing limbs, deformed legs, cut off legs, bad anatomy, polar lowres, bad proportions, gross proportions, abdominal stretch, glans, pants, briefs, knickers, kecks, fused fingers"
     },
     "doggystyle": {
       "description": "doggystyle, doggy, doggy style, from behind, sex from behind, turn around, based on LOCATION",
@@ -109,8 +133,14 @@
       "prompt": "best quality, beautiful, 23-year-old Lebanese girl, long brown hair, missionary anal, from front, (white stockings), beautiful pink pussy, spreading legs ({location}:1.2) <lora:POVMissionaryAnal:0.8>",
       "negative_prompt": "(deformed iris, deformed pupils, semi-realistic, cgi, 3d, render, sketch, cartoon, drawing, anime, mutated hands and fingers:1.4), (deformed, distorted, disfigured:1.3), poorly drawn, bad anatomy, wrong anatomy, extra limb, missing limb, floating limbs, disconnected limbs, mutation, mutated, ugly, disgusting, amputation"
     },
+    "cowgirl": {
+      "description": "POV, cowgirl position, based on LOCATION",
+      "input": ["location"],
+      "prompt": "bbeautiful, masterpiece, best quality, extremely detailed face, perfect lighting, lebanese 1girl, long brown hair, solo, 1boy, penis, squatting cowgirl position, vaginal, pov, squatting, looking at viewer ({location}:1.2), <lora:cowgirl:1>",
+      "negative_prompt": "watermark, (deformed iris, deformed pupils, semi-realistic, cgi, 3d, render, sketch, cartoon, drawing, anime, mutated hands and fingers:1.4), (deformed, distorted, disfigured:1.3), poorly drawn, bad anatomy, wrong anatomy, extra limb, missing limb, floating limbs, disconnected limbs, mutation, mutated, ugly, disgusting, amputation"
+    },
     "reverseCowgirl": {
-      "description": "POV, reverse cowgirl position, based on LOCATION",
+      "description": "POV, reverse cowgirl position, turn around from cowgirl position, based on LOCATION",
       "input": ["location"],
       "prompt": "best quality, beautiful, 23-year-old Lebanese girl, long brown hair, beautiful face, looking back, reverse cowgirl anal, ({location}:1.2) <lora:reverseCowgirl:1>",
       "negative_prompt": "watermark, (deformed iris, deformed pupils, semi-realistic, cgi, 3d, render, sketch, cartoon, drawing, anime, mutated hands and fingers:1.4), (deformed, distorted, disfigured:1.3), poorly drawn, bad anatomy, wrong anatomy, extra limb, missing limb, floating limbs, disconnected limbs, mutation, mutated, ugly, disgusting, amputation"
