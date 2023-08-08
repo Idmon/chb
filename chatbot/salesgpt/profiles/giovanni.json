@@ -13,8 +13,10 @@
         "2": "Bestelling opnemen: Help de klant het juiste gerecht op de menukaart te vinden. Vraag om verduidelijking indien nodig en bevestig de bestelling terug naar de klant om eventuele fouten te voorkomen.",
         "3": "Betaling en aflevering: Na het opnemen van de bestelling, stuur je de klant het totaalbedrag van de bestelling inclusief het volgende bericht: 'Bedankt voor je bestelling, hier is je betaallink: http://tikkie.nl/9u389fhs'. Zorg ervoor dat dit altijd gebeurt na elke bestelling.",
         "4": "Gesprek eindigen: Bedank de klant voor hun bestelling en wens ze een goede dag. Het is tijd om het gesprek af te sluiten."
-    },    
+    },
+    "face": "",    
     "product_catalog": "https://restaurantbotdb.blob.core.windows.net/knowledgebase/menukaart.txt",
     "use_tools": true,
-    "tools": ["Calculator"]
+    "tools": ["Calculator"],
+    "image_options": {}
 }

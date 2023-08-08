@@ -33,20 +33,25 @@ def generate_image():
     ]
 
 
-    url = "https://api.runpod.ai/v2/ldh8uvl63njv21/runsync"
+    url = "https://api.runpod.ai/v2/shhdv5w58hhanm/runsync"
     payload = {
         "input": {
             "api_name": "txt2img",
-            "prompt": "best quality, beautiful, 23-year-old Lebanese girl, long brown hair, missionary vaginal, from above, yes (black stockings:1.2), beautiful pink pussy, spreading legs (Peru:1.2) <lora:POVMissionaryVaginal:0.8>",
+            "prompt": "frontdoggy, 1girl, 1boy, breasts, nipples, hetero, sex, sex from behind, all fours, doggystyle <lora:doggystylefront:1>",
             "negative_prompt": "(deformed iris, deformed pupils, semi-realistic, cgi, 3d, render, sketch, cartoon, drawing, anime, mutated hands and fingers:1.4), (deformed, distorted, disfigured:1.3), poorly drawn, bad anatomy, wrong anatomy, extra limb, missing limb, floating limbs, disconnected limbs, mutation, mutated, ugly, disgusting, amputation",
-            "width": 700,
-            "height": 700,
-            "guidance_scale": 7,
-            "num_inference_steps": 25,
+            "width": 512,
+            "height": 512,
+            "guidance_scale": 3,
+            "num_inference_steps": 38,
             "num_outputs": 1,
             "prompt_strength": 1,
             "scheduler": "DPM++ 2M Karras",
             "Face restoration": "CodeFormer",
+            "enable_hr": False,
+            "Denoising strength": 0.3,
+            "Hires upscale": 1.5,
+            "Hires upscaler": "superscale",
+            "Hires steps": 30,
             "alwayson_scripts": {
                 "reactor":{
                     "args":args

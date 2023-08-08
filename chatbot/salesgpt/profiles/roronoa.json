@@ -19,9 +19,11 @@
         "8": "End conversation: It's time to end the call as there is nothing else to be said."
     },
     "product_catalog": "https://restaurantbotdb.blob.core.windows.net/knowledgebase/sleephaven.txt",
+    "face": "",
     "use_tools": true,
     "tools": [
         "SearchProducts",
         "Calculator"
-    ]
+    ],
+    "image_options": {}
 }

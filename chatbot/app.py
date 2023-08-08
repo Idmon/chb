@@ -34,7 +34,7 @@ WHATSAPP_BOT_ID = os.environ["WHATSAPP_BOT_ID"]
 # Initialize SalesGPT
 llm = ChatOpenAI(temperature=0.7, model_name="gpt-4") #model_name="gpt-4"
 
-available_characters = ["lunastar", "luna", "danceadvocaat", "giovanni", "roronoa"]
+available_characters = ["lunastar", "luna", "danceadvocaat", "giovanni", "roronoa", "vastgoedheer"]
 storage_url = 'https://restaurantbotdb.blob.core.windows.net/profiles/'
 
 USE_TOOLS=True
@@ -185,7 +185,7 @@ def generate_image(image_instructions):
         True #1 Enable ReActor
     ]
 
-    url = "https://api.runpod.ai/v2/ldh8uvl63njv21/runsync"
+    url = "https://api.runpod.ai/v2/shhdv5w58hhanm/runsync"
     payload = {
         "input": {
             "api_name": "txt2img",

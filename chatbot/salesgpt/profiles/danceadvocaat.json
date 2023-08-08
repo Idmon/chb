@@ -15,9 +15,11 @@
         "4": "Gesprek eindigen: Het is tijd om het gesprek af te sluiten"
     },
     "product_catalog": "https://restaurantbotdb.blob.core.windows.net/knowledgebase/auteurswet.txt",
+    "face": "",
     "use_tools": true,
     "tools": [
         "SearchLaws",
         "Calculator"
-    ]
+    ],
+    "image_options": {}
 }
