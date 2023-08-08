@@ -178,7 +178,7 @@ def generate_image(image_instructions):
     prompt, negPrompt, face =  agent_character['agent'].construct_prompt(image_instructions)
     print(prompt)
 
-    url = "https://api.runpod.ai/v2/thhl9ey00j243l/runsync"
+    url = "https://api.runpod.ai/v2/ldh8uvl63njv21/runsync"
     payload = {
         "input": {
             "api_name": "txt2img",
@@ -197,6 +197,7 @@ def generate_image(image_instructions):
 
     args = []
     if face != '':
+        print("FACE USED: " + face)
         base64_face = get_face(face)
 
         args=[
