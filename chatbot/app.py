@@ -175,15 +175,8 @@ def get_face(url):
 
 def generate_image(image_instructions):
 
-    prompt, negPrompt =  agent_character['agent'].construct_prompt(image_instructions)
+    prompt, negPrompt, face =  agent_character['agent'].construct_prompt(image_instructions)
     print(prompt)
-    
-    base64_face = get_face("https://restaurantbotdb.blob.core.windows.net/profiles/face.txt")
-
-    args=[
-        base64_face, #0
-        True #1 Enable ReActor
-    ]
 
     url = "https://api.runpod.ai/v2/thhl9ey00j243l/runsync"
     payload = {
@@ -193,19 +186,30 @@ def generate_image(image_instructions):
             "negative_prompt": negPrompt,
             "width": 512,
             "height": 512,
-            "guidance_scale": 7,
-            "num_inference_steps": 25,
+            "guidance_scale": 3,
+            "num_inference_steps": 38,
             "num_outputs": 1,
             "prompt_strength": 1,
             "scheduler": "DPM++ 2M Karras",
             "Face restoration": "CodeFormer"
-            # ,"alwayson_scripts": {
-            #     "reactor":{
-            #         "args":args
-            #         }
-            #     }
         }
     } 
+
+    args = []
+    if face != '':
+        base64_face = get_face(face)
+
+        args=[
+            base64_face, #0
+            True #1 Enable ReActor
+        ]
+
+        payload["input"]["alwayson_scripts"] = {
+            "reactor": {
+                "args": args
+            }
+        }
+
     headers = {
         "accept": "application/json",
         "content-type": "application/json",

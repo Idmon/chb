@@ -21,6 +21,8 @@ from salesgpt.tools import get_tools, setup_knowledge_base
 class SalesGPT(Chain, BaseModel):
     """Controller model for the Sales Agent."""
 
+    face: str = "default"
+
     conversation_history: List[str] = []
     conversation_stage_id: str = "1"
     stage_analyzer_chain: StageAnalyzerChain = Field(...)
@@ -93,7 +95,7 @@ class SalesGPT(Chain, BaseModel):
                 for idx, value in enumerate(values):
                     placeholder = "{" + self.image_options[key]['input'][idx] + "}"
                     prompt = prompt.replace(placeholder, value)
-                return prompt, negPrompt
+                return prompt, negPrompt, self.face
         return None
 
     @time_logger
@@ -291,7 +293,6 @@ class SalesGPT(Chain, BaseModel):
 
         if "use_tools" in kwargs.keys() and kwargs["use_tools"] is True:
             # set up agent with tools
-            #print(kwargs)
             load_tools = kwargs.get("tools", '')
             product_catalog = kwargs["product_catalog"]
             knowledge_base = setup_knowledge_base(product_catalog)
