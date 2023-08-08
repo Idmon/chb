@@ -91,26 +91,25 @@ def require_whatsapp_verification(f):
     return decorated_function
 
 def verify_whatsapp_request():
-    # incoming_msg = request.get_json()
-    # value = incoming_msg.get('entry', [{}])[0].get('changes', [{}])[0].get('value', {})
-    # timestamp = value.get('messages', [{}])[0].get('timestamp', None)
-    # if not timestamp:
-    #         return False
+    incoming_msg = request.get_json()
+    value = incoming_msg.get('entry', [{}])[0].get('changes', [{}])[0].get('value', {})
+    timestamp = value.get('messages', [{}])[0].get('timestamp', None)
+    if not timestamp:
+            return False
 
-    # try:
-    #     timestamp = float(timestamp)
-    # except ValueError:
-    #     return False
+    try:
+        timestamp = float(timestamp)
+    except ValueError:
+        return False
 
-    # current_time = datetime.datetime.now().timestamp()  # Current time in seconds since epoch
-    # time_difference = current_time - timestamp
+    current_time = datetime.datetime.now().timestamp()  # Current time in seconds since epoch
+    time_difference = current_time - timestamp
 
-    # # check if timestamp is older than 30 sec, return False, if message is fresh return True
-    # if time_difference > 30:
-    #     return False
-    # else:
-    #     return True
-    return True
+    # check if timestamp is older than 30 sec, return False, if message is fresh return True
+    if time_difference > 30:
+        return False
+    else:
+        return True
 
 def send_message(phone_number, message):
     url = f"https://graph.facebook.com/v17.0/{WHATSAPP_BOT_ID}/messages"  # Replace with your ID
@@ -283,7 +282,7 @@ def webhook():
                     agent_character['agent'].system_step("<IMAGE_READY>")
                     answer = agent_character['agent'].step()
                     answer = answer.replace("<IMAGE>", "")
-                    send_image(phone_number, "https://gf-chatbot.azurewebsites.net/image.png")
+                    send_image(phone_number, "https://gf-bot.azurewebsites.net/image.png")
                     send_message(phone_number, answer)
                 else:
                     send_message(phone_number, answer)
