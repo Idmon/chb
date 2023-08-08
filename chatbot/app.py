@@ -34,7 +34,7 @@ WHATSAPP_BOT_ID = os.environ["WHATSAPP_BOT_ID"]
 # Initialize SalesGPT
 llm = ChatOpenAI(temperature=0.7, model_name="gpt-4") #model_name="gpt-4"
 
-available_characters = ["lunastar", "danceadvocaat", "giovanni", "roronoa"]
+available_characters = ["lunastar", "luna", "danceadvocaat", "giovanni", "roronoa"]
 storage_url = 'https://restaurantbotdb.blob.core.windows.net/profiles/'
 
 USE_TOOLS=True
@@ -178,6 +178,12 @@ def generate_image(image_instructions):
     prompt, negPrompt, face =  agent_character['agent'].construct_prompt(image_instructions)
     print(prompt)
 
+    args=[
+        base64_face = get_face(face)
+        base64_face, #0
+        True #1 Enable ReActor
+    ]
+
     url = "https://api.runpod.ai/v2/ldh8uvl63njv21/runsync"
     payload = {
         "input": {
@@ -191,25 +197,31 @@ def generate_image(image_instructions):
             "num_outputs": 1,
             "prompt_strength": 1,
             "scheduler": "DPM++ 2M Karras",
-            "Face restoration": "CodeFormer"
+            "Face restoration": "CodeFormer",
+            "alwayson_scripts": {
+                "reactor": {
+                    "args": args
+                }
+            }
+            
         }
     } 
 
-    args = []
-    if face != '':
-        print("FACE USED: " + face)
-        base64_face = get_face(face)
+    # args = []
+    # if face != '':
+    #     print("FACE USED: " + face)
+    #     base64_face = get_face(face)
 
-        args=[
-            base64_face, #0
-            True #1 Enable ReActor
-        ]
+    #     args=[
+    #         base64_face, #0
+    #         True #1 Enable ReActor
+    #     ]
 
-        payload["input"]["alwayson_scripts"] = {
-            "reactor": {
-                "args": args
-            }
-        }
+    #     payload["input"]["alwayson_scripts"] = {
+    #         "reactor": {
+    #             "args": args
+    #         }
+    #     }
 
     headers = {
         "accept": "application/json",
