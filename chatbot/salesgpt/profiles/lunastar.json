@@ -18,21 +18,22 @@
     "7": "End conversation: It's time to end the call as there is nothing else to be said."
   },
   "product_catalog": "https://pastebin.com/raw/h32LNF7w",
+  "face": "https://restaurantbotdb.blob.core.windows.net/profiles/face.txt",
   "use_tools": true,
   "tools": [
     "Calculator", "CreateImage"
   ],
   "image_options": {
-    "standingnaked": {
-      "description": "nsfw photo, standing naked, OUTFIT photo, based on LOCATION",
-      "input": ["location", "outfit"],
-      "prompt": "({scene}), wearing {clothing} porno, nfsw, sex, coitus, photo of onlyfans girl, young woman, hasselblad H6D, natural lighting, oiled pale skin, long eye lashes, detailed skin texture, (blush:0.5), (goosebumps:0.5), subsurface scattering, RAW candid cinema, remarkable color, ultra realistic, textured skin,  realistic dull skin noise, visible skin detail, skin fuzz, dry skin, shot with cinematic camera, best composition, profesional color graded, realistic skin detail, re-touched, Enchanting sexyness",
-      "negative_prompt": "watermark, (deformed iris, deformed pupils, semi-realistic, cgi, 3d, render, sketch, cartoon, drawing, anime, mutated hands and fingers:1.4), (deformed, distorted, disfigured:1.3), poorly drawn, bad anatomy, wrong anatomy, extra limb, missing limb, floating limbs, disconnected limbs, mutation, mutated, ugly, disgusting, amputation"
-    },
     "outfit": {
-      "description": "normal sfw photo, OUTFIT photo, based on LOCATION",
+      "description": "normal sfw photo with clothes, OUTFIT photo, based on LOCATION",
       "input": ["location", "outfit"],
       "prompt": "best quality, beautiful, 23-year-old Lebanese supermodel, full body, long brown hair,  wearing ({outfit}), tanding in a modern minimalist {location}, perfect face, perfect lighting, intricate, incredible detail, masterpiece, professional photoshoot",
+      "negative_prompt": "watermark, (deformed iris, deformed pupils, semi-realistic, cgi, 3d, render, sketch, cartoon, drawing, anime, mutated hands and fingers:1.4), (deformed, distorted, disfigured:1.3), poorly drawn, bad anatomy, wrong anatomy, extra limb, missing limb, floating limbs, disconnected limbs, mutation, mutated, ugly, disgusting, amputation"
+    },
+    "standingnaked": {
+      "description": "nsfw erotic photo, standing naked, OUTFIT photo, based on LOCATION",
+      "input": ["location", "outfit"],
+      "prompt": "({scene}), wearing {clothing} porno, nfsw, sex, coitus, photo of onlyfans girl, young woman, hasselblad H6D, natural lighting, oiled pale skin, long eye lashes, detailed skin texture, (blush:0.5), (goosebumps:0.5), subsurface scattering, RAW candid cinema, remarkable color, ultra realistic, textured skin,  realistic dull skin noise, visible skin detail, skin fuzz, dry skin, shot with cinematic camera, best composition, profesional color graded, realistic skin detail, re-touched, Enchanting sexyness",
       "negative_prompt": "watermark, (deformed iris, deformed pupils, semi-realistic, cgi, 3d, render, sketch, cartoon, drawing, anime, mutated hands and fingers:1.4), (deformed, distorted, disfigured:1.3), poorly drawn, bad anatomy, wrong anatomy, extra limb, missing limb, floating limbs, disconnected limbs, mutation, mutated, ugly, disgusting, amputation"
     },
     "doggystyle": {
