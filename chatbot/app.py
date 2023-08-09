@@ -80,19 +80,10 @@ def get_character(url):
         print(f'Request failed with status {response.status_code}')
 
 # Initialize the Flask app
-logger = logging.getLogger("App")
+logger = logging.getLogger("000App")
 log = logging.getLogger('werkzeug')
 #log.addFilter(SuppressLogOutputFilter())
 flask_app = Flask(__name__, static_folder='static')
-
-
-# @flask_app.errorhandler(Exception)
-# def handle_exception(e):
-#     # Log the error
-#     logger.error(f"Unhandled exception: {str(e)}", exc_info=True)
-
-#     # You can either return a string with the error here or render an error template, or jsonify the error
-#     return jsonify(error=str(e)), 500  # or render_template('error_page.html'), or just str(e), depending on your use-case
 
 
 @flask_app.route('/log-output', methods=['GET'])

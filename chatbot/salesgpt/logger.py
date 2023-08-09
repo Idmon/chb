@@ -22,7 +22,7 @@ class InMemoryHandler(logging.Handler):
 in_memory_handler = InMemoryHandler()
 stream_handler = logging.StreamHandler()
 log_filename = "output.log"
-file_handler = logging.FileHandler(filename=log_filename)
+file_handler = logging.FileHandler(filename=log_filename, encoding="utf-8")
 handlers = [stream_handler, file_handler, in_memory_handler]
 
 

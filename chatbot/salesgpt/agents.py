@@ -1,6 +1,7 @@
 import re
 from copy import deepcopy
 from typing import Any, Dict, List, Union
+import logging
 
 from langchain import LLMChain
 from langchain.agents import AgentExecutor, LLMSingleActionAgent
@@ -17,6 +18,7 @@ from salesgpt.stages import CONVERSATION_STAGES
 from salesgpt.templates import CustomPromptTemplateForTools
 from salesgpt.tools import get_tools, setup_knowledge_base
 
+logger = logging.getLogger("Agent")
 
 class SalesGPT(Chain, BaseModel):
     """Controller model for the Sales Agent."""
@@ -110,7 +112,7 @@ class SalesGPT(Chain, BaseModel):
             conversation_history="\n".join(self.conversation_history).rstrip("\n"),
             image_options=image_options_str
         )
-        print(f"Image Prompt: {image_prompt}")
+        logger.info(f"Prompt from LLM: {image_prompt}")
         image_instructions = self.parse_output2(image_prompt)
 
         return image_instructions
@@ -129,12 +131,12 @@ class SalesGPT(Chain, BaseModel):
             ),
         )
 
-        print(f"Conversation Stage ID: {self.conversation_stage_id}")
+        logger.info(f"Conversation Stage ID: {self.conversation_stage_id}")
         self.current_conversation_stage = self.retrieve_conversation_stage(
             self.conversation_stage_id
         )
 
-        print(f"Conversation Stage: {self.current_conversation_stage}")
+        logger.info(f"Conversation Stage: {self.current_conversation_stage}")
 
     def human_step(self, human_input):
         # process human input
@@ -258,7 +260,7 @@ class SalesGPT(Chain, BaseModel):
         agent_name = self.salesperson_name
         ai_message = agent_name + ": " + ai_message
         self.conversation_history.append(ai_message)
-        print(agent_name + ": " + message)
+        logger.info(agent_name + ": " + message)
         return message
 
 
