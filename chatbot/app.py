@@ -81,8 +81,8 @@ def get_character(url):
 
 # Initialize the Flask app
 logger = logging.getLogger("App")
-# log = logging.getLogger('werkzeug')
-# log.addFilter(SuppressLogOutputFilter())
+log = logging.getLogger('werkzeug')
+#log.addFilter(SuppressLogOutputFilter())
 flask_app = Flask(__name__, static_folder='static')
 
 
@@ -95,43 +95,43 @@ flask_app = Flask(__name__, static_folder='static')
 #     return jsonify(error=str(e)), 500  # or render_template('error_page.html'), or just str(e), depending on your use-case
 
 
-# @flask_app.route('/log-output', methods=['GET'])
-# def get_logs():
-#     logs = in_memory_handler.get_logs()
-#     return jsonify(logs)
+@flask_app.route('/log-output', methods=['GET'])
+def get_logs():
+    logs = in_memory_handler.get_logs()
+    return jsonify(logs)
 
 
-# @flask_app.route('/logs', methods=['GET'])
-# def log_viewer():
-#     return '''
-#     <!DOCTYPE html>
-#     <html lang="en">
-#     <head>
-#         <meta charset="UTF-8">
-#         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-#         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-#         <title>Live Logs</title>
-#     </head>
-#     <body>
-#         <div id="log-content"></div>
+@flask_app.route('/logs', methods=['GET'])
+def log_viewer():
+    return '''
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Live Logs</title>
+    </head>
+    <body>
+        <div id="log-content"></div>
 
-#         <script>
-#             function fetchLogs() {
-#                 fetch('/log-output')
-#                     .then(response => response.json())
-#                     .then(data => {
-#                         const logs = data.map(log => `<pre style='margin:0;'>${log}</pre>`).join('\\n');
-#                         document.getElementById('log-content').innerHTML = logs;
-#                     })
-#                     .catch(error => console.error('Error fetching logs:', error));
-#             }
+        <script>
+            function fetchLogs() {
+                fetch('/log-output')
+                    .then(response => response.json())
+                    .then(data => {
+                        const logs = data.map(log => `<pre style='margin:0;'>${log}</pre>`).join('\\n');
+                        document.getElementById('log-content').innerHTML = logs;
+                    })
+                    .catch(error => console.error('Error fetching logs:', error));
+            }
 
-#             setInterval(fetchLogs, 5000);  // Refresh every 5 seconds
-#             fetchLogs();  // Initial fetch
-#         </script>
-#     </body>
-#     </html>
-#     '''
+            setInterval(fetchLogs, 5000);  // Refresh every 5 seconds
+            fetchLogs();  // Initial fetch
+        </script>
+    </body>
+    </html>
+    '''
 
 
 
