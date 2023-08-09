@@ -120,14 +120,14 @@
       "prompt": "best quality, beautiful, 23-year-old Lebanese girl, long brown hair, {clothing} (from below, looking down), front view, pussy visible, showing pussy, wide hips, pussy focus, pussy close-up, (low angle) <lora:POVpussyfrombelow:0.7>",
       "negative_prompt": "(deformed iris, deformed pupils, semi-realistic, cgi, 3d, render, sketch, cartoon, drawing, anime, mutated hands and fingers:1.4), (deformed, distorted, disfigured:1.3), poorly drawn, bad anatomy, wrong anatomy, extra limb, missing limb, floating limbs, disconnected limbs, mutation, mutated, ugly, disgusting, amputation"
     },
-    "POVMissionaryVaginal": {
-      "description": "missionairy position, vaginal, POV, based on LOCATION, either naked or wearing shirt only",
+    "MissionaryVaginal": {
+      "description": "vaginal, missionary position, based on LOCATION, either naked or wearing shirt only",
       "input": ["location", "wearing_shirt"],
       "prompt": "best quality, beautiful, 23-year-old Lebanese girl, long brown hair, missionary vaginal, from above, {wearing_shirt} (black stockings:1.2), beautiful pink pussy, spreading legs ({location}:1.2) <lora:POVMissionaryVaginal:0.8>",
       "negative_prompt": "(deformed iris, deformed pupils, semi-realistic, cgi, 3d, render, sketch, cartoon, drawing, anime, mutated hands and fingers:1.4), (deformed, distorted, disfigured:1.3), poorly drawn, bad anatomy, wrong anatomy, extra limb, missing limb, floating limbs, disconnected limbs, mutation, mutated, ugly, disgusting, amputation"
     },
-    "POVMissionaryAnal": {
-      "description": "missionairy position, anal, POV, based on LOCATION",
+    "MissionaryAnal": {
+      "description": "anal, missionary position, based on LOCATION",
       "input": ["location"],
       "prompt": "best quality, beautiful, 23-year-old Lebanese girl, long brown hair, missionary anal, from front, (white stockings), beautiful pink pussy, spreading legs ({location}:1.2) <lora:POVMissionaryAnal:0.8>",
       "negative_prompt": "(deformed iris, deformed pupils, semi-realistic, cgi, 3d, render, sketch, cartoon, drawing, anime, mutated hands and fingers:1.4), (deformed, distorted, disfigured:1.3), poorly drawn, bad anatomy, wrong anatomy, extra limb, missing limb, floating limbs, disconnected limbs, mutation, mutated, ugly, disgusting, amputation"
@@ -135,7 +135,7 @@
     "cowgirl": {
       "description": "POV, cowgirl position, based on LOCATION",
       "input": ["location"],
-      "prompt": "bbeautiful, masterpiece, best quality, extremely detailed face, perfect lighting, lebanese 1girl, long brown hair, solo, 1boy, penis, squatting cowgirl position, vaginal, pov, squatting, looking at viewer ({location}:1.2), <lora:cowgirl:1>",
+      "prompt": "beautiful, masterpiece, best quality, extremely detailed face, perfect lighting, lebanese 1girl, long brown hair, solo, 1boy, penis, squatting cowgirl position, vaginal, pov, squatting, looking at viewer ({location}:1.2), <lora:cowgirl:1>",
       "negative_prompt": "watermark, (deformed iris, deformed pupils, semi-realistic, cgi, 3d, render, sketch, cartoon, drawing, anime, mutated hands and fingers:1.4), (deformed, distorted, disfigured:1.3), poorly drawn, bad anatomy, wrong anatomy, extra limb, missing limb, floating limbs, disconnected limbs, mutation, mutated, ugly, disgusting, amputation"
     },
     "reverseCowgirl": {

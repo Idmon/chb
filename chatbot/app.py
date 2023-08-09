@@ -6,10 +6,11 @@ import requests
 import logging
 import datetime
 from functools import wraps
-from flask import Flask, request, abort, send_from_directory
+from flask import Flask, request, abort, send_from_directory, jsonify, Response
 from dotenv import find_dotenv, load_dotenv
 from streamlit_ui import streamlit_interface
 from salesgpt.agents import SalesGPT
+from salesgpt.logger import in_memory_handler
 from langchain.chat_models import ChatOpenAI
 
 
@@ -23,6 +24,10 @@ logging.basicConfig(
     format="%(asctime)s [%(levelname)s] %(message)s",
     stream=sys.stdout,
 )
+
+class SuppressLogOutputFilter(logging.Filter):
+    def filter(self, record):
+        return '/log-output' not in record.getMessage()
 
 # Load environment variables from .env file
 load_dotenv(find_dotenv())
@@ -46,7 +51,7 @@ def initialize_salesGPT_agent(character):
     agent_character['character'] = character
     config_path = storage_url + character + '.txt'
     if config_path == '':
-        print('No agent config specified, using a standard config')
+        logger.info('No agent config specified, using a standard config')
         if USE_TOOLS:
             newAgent = SalesGPT.from_llm(llm, use_tools=True, 
                         product_catalog = None,
@@ -75,7 +80,59 @@ def get_character(url):
         print(f'Request failed with status {response.status_code}')
 
 # Initialize the Flask app
+logger = logging.getLogger("App")
+log = logging.getLogger('werkzeug')
+log.addFilter(SuppressLogOutputFilter())
 flask_app = Flask(__name__, static_folder='static')
+
+
+@flask_app.errorhandler(Exception)
+def handle_exception(e):
+    # Log the error
+    logger.error(f"Unhandled exception: {str(e)}", exc_info=True)
+
+    # You can either return a string with the error here or render an error template, or jsonify the error
+    return jsonify(error=str(e)), 500  # or render_template('error_page.html'), or just str(e), depending on your use-case
+
+
+@flask_app.route('/log-output', methods=['GET'])
+def get_logs():
+    logs = in_memory_handler.get_logs()
+    return jsonify(logs)
+
+
+@flask_app.route('/logs', methods=['GET'])
+def log_viewer():
+    return '''
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Live Logs</title>
+    </head>
+    <body>
+        <div id="log-content"></div>
+
+        <script>
+            function fetchLogs() {
+                fetch('/log-output')
+                    .then(response => response.json())
+                    .then(data => {
+                        const logs = data.map(log => `<pre style='margin:0;'>${log}</pre>`).join('\\n');
+                        document.getElementById('log-content').innerHTML = logs;
+                    })
+                    .catch(error => console.error('Error fetching logs:', error));
+            }
+
+            setInterval(fetchLogs, 5000);  // Refresh every 5 seconds
+            fetchLogs();  // Initial fetch
+        </script>
+    </body>
+    </html>
+    '''
+
 
 
 @flask_app.route('/<path:filename>')  
@@ -176,7 +233,7 @@ def get_face(url):
 def generate_image(image_instructions):
 
     prompt, negPrompt, face =  agent_character['agent'].construct_prompt(image_instructions)
-    print("Image Instructions: " + str(image_instructions))
+    logger.info("Image Instructions: " + str(image_instructions))
 
     base64_face = get_face(face)
     args=[
@@ -245,7 +302,7 @@ def generate_image(image_instructions):
 
     # Get the base64 image data of the first image
     base64_image_data = response_json['output']['images'][0]
-    print(base64_image_data[:50])
+    logger.info("Image downloaded" + base64_image_data[:50])
 
     # Save path for the image
     save_path = 'static/image.png'
@@ -271,7 +328,7 @@ def webhook():
 
         if phone_number is not None:
             text_msg = value.get('messages', [{}])[0].get('text', {}).get('body', '')
-            print("User: " + text_msg)
+            logger.info("User: " + text_msg)
 
             if text_msg in available_characters:
                 agent_character['agent'] = initialize_salesGPT_agent(text_msg)

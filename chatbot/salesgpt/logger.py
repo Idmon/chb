@@ -4,10 +4,26 @@ from functools import wraps
 
 logger = logging.getLogger(__name__)
 
+class InMemoryHandler(logging.Handler):
+    def __init__(self, capacity=1000):
+        super().__init__()
+        self.capacity = capacity
+        self.logs = []
+    
+    def emit(self, record):
+        self.logs.append(self.format(record))
+        while len(self.logs) > self.capacity:
+            self.logs.pop(0)
+
+    def get_logs(self):
+        return self.logs
+
+
+in_memory_handler = InMemoryHandler()
 stream_handler = logging.StreamHandler()
 log_filename = "output.log"
 file_handler = logging.FileHandler(filename=log_filename)
-handlers = [stream_handler, file_handler]
+handlers = [stream_handler, file_handler, in_memory_handler]
 
 
 class TimeFilter(logging.Filter):
