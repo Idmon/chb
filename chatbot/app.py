@@ -5,6 +5,7 @@ import json
 import requests
 import logging
 import datetime
+import threading
 from functools import wraps
 from flask import Flask, request, abort, send_from_directory, jsonify, Response
 from dotenv import find_dotenv, load_dotenv
@@ -330,9 +331,7 @@ def webhook():
                 # Pass the message to chatbot for processing
                 answer = respond_agent(agent_character['agent'], text_msg)
 
-                if '<PROCESS_IMAGE>' in answer:
-                    answer = answer.replace("<PROCESS_IMAGE>", "")
-                    send_message(phone_number, answer)
+                def non_blocking_operations(phone_number):
                     image_prompt = agent_character['agent'].create_image_prompt()
                     generate_image(image_prompt)
                     agent_character['agent'].system_step("<IMAGE_READY>")
@@ -340,6 +339,15 @@ def webhook():
                     answer = answer.replace("<IMAGE>", "")
                     send_image(phone_number, "https://gf-bot.azurewebsites.net/image.png")
                     send_message(phone_number, answer)
+
+
+                if '<PROCESS_IMAGE>' in answer:
+                    answer = answer.replace("<PROCESS_IMAGE>", "")
+                    send_message(phone_number, answer)
+
+                    # Start the non-blocking operations in a separate thread
+                    thread = threading.Thread(target=non_blocking_operations, args=(phone_number,))
+                    thread.start()
                 else:
                     send_message(phone_number, answer)
 
