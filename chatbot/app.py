@@ -303,7 +303,7 @@ def generate_image(image_instructions):
     save_path = 'static/image.png'
 
     # Call the function to save the base64 image data as an actual image
-    #save_base64_as_image(base64_image_data, save_path)
+    save_base64_as_image(base64_image_data, save_path)
 
 
 @flask_app.route('/webhook', methods=['GET', 'POST'])
