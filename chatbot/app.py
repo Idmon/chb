@@ -13,6 +13,7 @@ from streamlit_ui import streamlit_interface
 from salesgpt.agents import SalesGPT
 from salesgpt.logger import in_memory_handler
 from langchain.chat_models import ChatOpenAI
+from Class import webuiLLM
 
 
 import base64
@@ -37,15 +38,17 @@ load_dotenv(find_dotenv())
 WHATSAPP_API_KEY = os.environ["WHATSAPP_API_KEY"]
 WHATSAPP_BOT_ID = os.environ["WHATSAPP_BOT_ID"]
 
+
 # Initialize SalesGPT
-llm = ChatOpenAI(temperature=0.7, model_name="gpt-4") #model_name="gpt-4"
+llm = ChatOpenAI(temperature=0.7, model_name="gpt-3.5-turbo-0613") #model_name="gpt-4"
+#llm = webuiLLM()
 
 available_characters = ["lunastar", "luna", "danceadvocaat", "giovanni", "roronoa", "vastgoedheer"]
 storage_url = 'https://restaurantbotdb.blob.core.windows.net/profiles/'
 
 USE_TOOLS=True
 agent_character = {}
-verbose = False
+verbose = True
 
 def initialize_salesGPT_agent(character):
     newAgent=[]

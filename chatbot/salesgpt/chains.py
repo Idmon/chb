@@ -3,6 +3,21 @@ from langchain.llms import BaseLLM
 
 from salesgpt.logger import time_logger
 
+class ChatAnalyzerChain(LLMChain):
+    """Chain to analyze what to respond to in chat conservation."""
+
+    @classmethod
+    @time_logger
+    def from_llm(cls, llm: BaseLLM, verbose: bool = True) -> LLMChain:
+        """Get the response parser."""
+        chat_analyzer_inception_prompt_template = "{answer}"
+        prompt = PromptTemplate(
+            template=chat_analyzer_inception_prompt_template,
+            input_variables=["answer"],
+        )
+        return cls(prompt=prompt, llm=llm, verbose=verbose)
+
+
 
 class ImagePromptAnalyzerChain(LLMChain):
     """Chain to analyze what prompt to use for the image based on the conservation."""
@@ -31,18 +46,17 @@ class ImagePromptAnalyzerChain(LLMChain):
             Take key details such as location, clothing items or other information from the conversation to provide as output.
             You always output in comma-separated values by first providing the image option name, then each input in order.
             Here are examples of outputs:
-            Image: pantsdown, Dubai top city view, blue yoga pants
-            Image: titfuck, Machu Picchu Peru
-            Image: legsup, bedroom
-            Image: POVpussyfrombelow, blue skirt
-            Image: reverseCowgirl, Neo Tokyo alley way
-            Image: shirtlift, pink hoodie
+            pantsdown, Dubai top city view, blue yoga pants
+            titfuck, Machu Picchu Peru
+            legsup, bedroom
+            POVpussyfrombelow, blue skirt
+            reverseCowgirl, Neo Tokyo alley way
+            shirtlift, pink hoodie
 
-            Always provide an output for each required input based on the conversation history
+            Always provide an output for each required INPUT based on the conversation history
             Instructions
             ----
             Now determine how this image should look like based on the conversation history in '==='.
-            Image description:
             """
         prompt = PromptTemplate(
             template=imageprompt_analyzer_inception_prompt_template,

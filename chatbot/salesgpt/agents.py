@@ -10,7 +10,7 @@ from langchain.chains.base import Chain
 from langchain.llms import BaseLLM
 from pydantic import BaseModel, Field
 
-from salesgpt.chains import SalesConversationChain, StageAnalyzerChain, ImagePromptAnalyzerChain
+from salesgpt.chains import SalesConversationChain, StageAnalyzerChain, ImagePromptAnalyzerChain, ChatAnalyzerChain
 from salesgpt.logger import time_logger
 from salesgpt.parsers import SalesConvoOutputParser
 from salesgpt.prompts import SALES_AGENT_TOOLS_PROMPT
@@ -29,6 +29,7 @@ class SalesGPT(Chain, BaseModel):
     conversation_stage_id: str = "1"
     stage_analyzer_chain: StageAnalyzerChain = Field(...)
     image_analyzer_chain: ImagePromptAnalyzerChain = Field(...)
+    chat_analyzer_chain: ChatAnalyzerChain = Field(...)
     sales_agent_executor: Union[AgentExecutor, None] = Field(...)
     knowledge_base: Union[RetrievalQA, None] = Field(...)
     sales_conversation_utterance_chain: SalesConversationChain = Field(...)
@@ -108,8 +109,10 @@ class SalesGPT(Chain, BaseModel):
                 for key, value in self.image_options.items()
             ]
         )
+
+        last_messages = "\n".join(self.conversation_history[-10:]).rstrip("\n")
         image_prompt = self.image_analyzer_chain.run(
-            conversation_history="\n".join(self.conversation_history).rstrip("\n"),
+            conversation_history=last_messages,
             image_options=image_options_str
         )
         logger.info(f"Prompt from LLM: {image_prompt}")
@@ -217,13 +220,23 @@ class SalesGPT(Chain, BaseModel):
     def _call(self, inputs: Dict[str, Any]) -> None:
         """Run one step of the sales agent."""
 
+        last_messages = "\n".join(self.conversation_history[-10:])
+
         # Generate agent's utterance
         # if use tools
         if self.use_tools:
+            # print("AGENT")
+            # last_message = self.conversation_history[-1]
+            # ai_message = self.chat_analyzer_chain.run(
+            #     answer=last_messages
+            # )
+            # logger.info(f"Answer from LLM: {ai_message}")
+
+
             ai_message = self.sales_agent_executor.run(
                 input="",
                 conversation_stage=self.current_conversation_stage,
-                conversation_history="\n".join(self.conversation_history),
+                conversation_history=last_messages,
                 salesperson_name=self.salesperson_name,
                 salesperson_role=self.salesperson_role,
                 company_name=self.company_name,
@@ -240,7 +253,7 @@ class SalesGPT(Chain, BaseModel):
             # else
             ai_message = self.sales_conversation_utterance_chain.run(
                 conversation_stage=self.current_conversation_stage,
-                conversation_history="\n".join(self.conversation_history),
+                conversation_history=last_messages,
                 salesperson_name=self.salesperson_name,
                 salesperson_role=self.salesperson_role,
                 company_name=self.company_name,
@@ -270,6 +283,7 @@ class SalesGPT(Chain, BaseModel):
         """Initialize the SalesGPT Controller."""
         stage_analyzer_chain = StageAnalyzerChain.from_llm(llm, verbose=verbose)
         image_analyzer_chain = ImagePromptAnalyzerChain.from_llm(llm, verbose=verbose)
+        chat_analyzer_chain = ChatAnalyzerChain.from_llm(llm, verbose=verbose)
         if (
             "use_custom_prompt" in kwargs.keys()
             and kwargs["use_custom_prompt"] == "True"
@@ -318,6 +332,7 @@ class SalesGPT(Chain, BaseModel):
                     "tools"
                 ],
             )
+            
             llm_chain = LLMChain(llm=llm, prompt=prompt, verbose=verbose)
 
             tool_names = [tool.name for tool in tools]
@@ -347,6 +362,7 @@ class SalesGPT(Chain, BaseModel):
         )
 
         return cls(
+            chat_analyzer_chain=chat_analyzer_chain,
             conversation_stages=conversation_stages,
             conversation_stage_dict=conversation_stage_dict,
             stage_analyzer_chain=stage_analyzer_chain,
