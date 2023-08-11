@@ -17,6 +17,7 @@ from salesgpt.prompts import SALES_AGENT_TOOLS_PROMPT
 from salesgpt.stages import CONVERSATION_STAGES
 from salesgpt.templates import CustomPromptTemplateForTools
 from salesgpt.tools import get_tools, setup_knowledge_base
+from salesgpt.customLLM import GenerateImageLLM
 
 logger = logging.getLogger("Agent")
 
@@ -225,29 +226,29 @@ class SalesGPT(Chain, BaseModel):
         # Generate agent's utterance
         # if use tools
         if self.use_tools:
-            # print("AGENT")
-            # last_message = self.conversation_history[-1]
-            # ai_message = self.chat_analyzer_chain.run(
-            #     answer=last_messages
-            # )
-            # logger.info(f"Answer from LLM: {ai_message}")
-
-
-            ai_message = self.sales_agent_executor.run(
-                input="",
-                conversation_stage=self.current_conversation_stage,
-                conversation_history=last_messages,
-                salesperson_name=self.salesperson_name,
-                salesperson_role=self.salesperson_role,
-                company_name=self.company_name,
-                company_business=self.company_business,
-                company_values=self.company_values,
-                conversation_purpose=self.conversation_purpose,
-                conversation_type=self.conversation_type,
-                conversation_stages=self.conversation_stages,
-                conversation_stage_dict=self.conversation_stage_dict,
-                tools=self.tools
+            print("AGENT")
+            last_message = self.conversation_history[-1]
+            ai_message = self.chat_analyzer_chain.run(
+                answer=last_messages
             )
+            logger.info(f"Answer from LLM: {ai_message}")
+
+
+            # ai_message = self.sales_agent_executor.run(
+            #     input="",
+            #     conversation_stage=self.current_conversation_stage,
+            #     conversation_history=last_messages,
+            #     salesperson_name=self.salesperson_name,
+            #     salesperson_role=self.salesperson_role,
+            #     company_name=self.company_name,
+            #     company_business=self.company_business,
+            #     company_values=self.company_values,
+            #     conversation_purpose=self.conversation_purpose,
+            #     conversation_type=self.conversation_type,
+            #     conversation_stages=self.conversation_stages,
+            #     conversation_stage_dict=self.conversation_stage_dict,
+            #     tools=self.tools
+            # )
 
         else:
             # else
@@ -282,7 +283,8 @@ class SalesGPT(Chain, BaseModel):
     def from_llm(cls, llm: BaseLLM, verbose: bool = False, **kwargs) -> "SalesGPT":
         """Initialize the SalesGPT Controller."""
         stage_analyzer_chain = StageAnalyzerChain.from_llm(llm, verbose=verbose)
-        image_analyzer_chain = ImagePromptAnalyzerChain.from_llm(llm, verbose=verbose)
+        llmImage = GenerateImageLLM()
+        image_analyzer_chain = ImagePromptAnalyzerChain.from_llm(llmImage, verbose=verbose)
         chat_analyzer_chain = ChatAnalyzerChain.from_llm(llm, verbose=verbose)
         if (
             "use_custom_prompt" in kwargs.keys()

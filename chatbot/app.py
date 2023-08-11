@@ -13,7 +13,7 @@ from streamlit_ui import streamlit_interface
 from salesgpt.agents import SalesGPT
 from salesgpt.logger import in_memory_handler
 from langchain.chat_models import ChatOpenAI
-from Class import webuiLLM
+from salesgpt.customLLM import customChatLLM
 
 
 import base64
@@ -40,8 +40,8 @@ WHATSAPP_BOT_ID = os.environ["WHATSAPP_BOT_ID"]
 
 
 # Initialize SalesGPT
-llm = ChatOpenAI(temperature=0.7, model_name="gpt-3.5-turbo-0613") #model_name="gpt-4"
-#llm = webuiLLM()
+#llm = ChatOpenAI(temperature=0.7, model_name="gpt-3.5-turbo-0613") #model_name="gpt-4"
+llm = customChatLLM()
 
 available_characters = ["lunastar", "luna", "danceadvocaat", "giovanni", "roronoa", "vastgoedheer"]
 storage_url = 'https://restaurantbotdb.blob.core.windows.net/profiles/'
@@ -303,7 +303,7 @@ def generate_image(image_instructions):
     save_path = 'static/image.png'
 
     # Call the function to save the base64 image data as an actual image
-    save_base64_as_image(base64_image_data, save_path)
+    #save_base64_as_image(base64_image_data, save_path)
 
 
 @flask_app.route('/webhook', methods=['GET', 'POST'])

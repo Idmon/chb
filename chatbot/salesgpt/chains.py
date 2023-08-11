@@ -81,9 +81,9 @@ class ImagePromptAnalyzerChain(LLMChain):
             ----
             Always provide an output for each required INPUT from the IMAGES OPTIONS based on the CONVERSATION HISTORY
             Do not add extra input that do not exist with that image type, always stay coherent to the given structure from the IMAGES OPTIONS list.
-            Now determine how this image should look like based on the conversation history in '==='.
+            Always ouput your answers in the following format "image_option, input1, input2, .." and do not generate any other natural text!
 
-            Always ouput your answers in the following format "image_option, input1, input2, .." and do not generate any other natural text
+            Now determine how this image should look like based on the conversation history in '==='. Make sure you follow the format described as "image_option, input1, input2, ..". Do not add or wrap any other text around it!
             """
         prompt = PromptTemplate(
             template=imageprompt_analyzer_inception_prompt_template,
