@@ -40,15 +40,34 @@ class ImagePromptAnalyzerChain(LLMChain):
             {conversation_history}
             ===
             
-            Examples
+            Input
+            ----
+            If an image option has no input, then you output nothing
+            Now that you know the conversation context. It is important to match the input given for each image option.
+            Always use short descriptive words and no long sentences. Only choose the most important key elements.
+            If location is unknown, always choose between a random room in the house (Choices: living room, bedroom, kitchen, bathroom, backyard, hall, etc.)
+            If outfit is unknown, always choose a random outfit set (skirt, dress, hotpants, long dress)
+            If one of the input elements is still unknown in the conversation, try to take a best guess and generate it. Always appropriately come up with a real location, outfit style, etc.
+            Pay extra good attention to the room, environment or location on where the conversation is happening and describe that in LOCATION output
+            
+            Here are top 4 examples of inputs and their description (there are more):
+            location - the place or space where the conversation is in.
+            outfit - the clothing she's wearing including color and specifics
+            color - refering to the color of a clothing item or set
+            pose - the pose she's in (standing, kneeling, all fours, sitting, etc)
+            ...
+
+            OUTPUT Examples
             ----
             Based on the conversation history you select an image that best suits the current scenario.
             Take key details such as location, clothing items or other information from the conversation to provide as output.
             You always output in comma-separated values by first providing the image option name, then each input in order.
             Here are examples of outputs:
             pantsdown, Dubai top city view, blue yoga pants
+            outfit, backyard, blue skirt and pink crop top
             titfuck, Machu Picchu Peru
             legsup, bedroom
+            outfit, Olympia, Olympic Costume
             POVpussyfrombelow, blue skirt
             reverseCowgirl, Neo Tokyo alley way
             shirtlift, pink hoodie
@@ -57,6 +76,8 @@ class ImagePromptAnalyzerChain(LLMChain):
             Instructions
             ----
             Now determine how this image should look like based on the conversation history in '==='.
+
+            Always ouput your answers in the following format "image_option, input1, input2, .." and do not generate any other natural text
             """
         prompt = PromptTemplate(
             template=imageprompt_analyzer_inception_prompt_template,
