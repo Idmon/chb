@@ -23,7 +23,7 @@ class customChatLLM(LLM):
         return "custom"
 
     def _call(self, prompt: str, stop: Optional[List[str]] = None) -> str:
-        URI = f'http://{HOST}/api/v1/chat'
+        URI = f'https://{HOST}/api/v1/chat'
 
         request = {
             'user_input': "prompt here",
@@ -109,7 +109,7 @@ class GenerateImageLLM(LLM):
         return "custom"
 
     def _call(self, prompt: str, stop: Optional[List[str]] = None) -> str:
-        URI = f'http://{HOST}/api/v1/chat'
+        URI = f'https://{HOST}/api/v1/chat'
 
         request = {
             'user_input': "prompt",

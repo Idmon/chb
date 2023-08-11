@@ -37,6 +37,7 @@ load_dotenv(find_dotenv())
 # Set Whatsapp API credentials
 WHATSAPP_API_KEY = os.environ["WHATSAPP_API_KEY"]
 WHATSAPP_BOT_ID = os.environ["WHATSAPP_BOT_ID"]
+SD_API_HOST = os.environ["SD_API_HOST"]
 
 
 # Initialize SalesGPT
@@ -237,53 +238,36 @@ def generate_image(image_instructions):
         True, #1 Enable ReActor
         '0', #2 Comma separated face number(s) from swap-source image
         '0', #3 Comma separated face number(s) for target image (result)
-        '/stable-diffusion-webui/models/roop/inswapper_128.onnx', #4 model path
+        '/StableDiffusion/stable-diffusion-webui/models/roop/inswapper_128.onnx', #4 model path
         'CodeFormer', #4 Restore Face: None; CodeFormer; GFPGAN
         1, #5 Restore visibility value
         True, #7 Restore face -> Upscale
     ]
 
-    url = "https://api.runpod.ai/v2/shhdv5w58hhanm/runsync"
+    # url = "https://api.runpod.ai/v2/shhdv5w58hhanm/runsync"
+    url = f"https://{SD_API_HOST}/sdapi/v1/txt2img"
     payload = {
-        "input": {
-            "api_name": "txt2img",
-            "prompt": prompt,
-            "negative_prompt": negPrompt,
-            "width": 512,
-            "height": 512,
-            "guidance_scale": 3,
-            "num_inference_steps": 38,
-            "num_outputs": 1,
-            "prompt_strength": 1,
-            "scheduler": "DPM++ 2M Karras",
-            "enable_hr": True,
-            "denoising_strength": 0.3,
-            "hires_upscale": 1.25,
-            "hires_upscaler": "superscale",
-            "hires_steps": 30,
-            "alwayson_scripts": {
-                "reactor":{
-                    "args":args
-                    }
+        # "api_name": "txt2img",
+        "prompt": prompt,
+        "negative_prompt": negPrompt,
+        "width": 512,
+        "height": 512,
+        "guidance_scale": 3,
+        "num_inference_steps": 38,
+        "num_outputs": 1,
+        "prompt_strength": 1,
+        "scheduler": "DPM++ 2M Karras",
+        # "enable_hr": True,
+        "denoising_strength": 0.3,
+        # "hires_upscale": 1.25,
+        # "hires_upscaler": "superscale",
+        # "hires_steps": 30,
+        "alwayson_scripts": {
+            "reactor":{
+                "args":args
                 }
-        }
+            }
     } 
-
-    # args = []
-    # if face != '':
-    #     print("FACE USED: " + face)
-    #     base64_face = get_face(face)
-
-    #     args=[
-    #         base64_face, #0
-    #         True #1 Enable ReActor
-    #     ]
-
-    #     payload["input"]["alwayson_scripts"] = {
-    #         "reactor": {
-    #             "args": args
-    #         }
-    #     }
 
     headers = {
         "accept": "application/json",
@@ -297,7 +281,7 @@ def generate_image(image_instructions):
     response_json = response.json()
 
     # Get the base64 image data of the first image
-    base64_image_data = response_json['output']['images'][0]
+    base64_image_data = response_json['images'][0]
     logger.info("Image downloaded" + base64_image_data[:50])
 
     # Save path for the image
