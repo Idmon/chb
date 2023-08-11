@@ -73,8 +73,8 @@ class ImagePromptAnalyzerChain(LLMChain):
             titfuck, Machu Picchu Peru
             legsup, bedroom
             outfit, Olympia, Olympic Costume
-            POVpussyfrombelow, blue skirt
-            reverseCowgirl, Neo Tokyo alley way
+            pussyfrombelow, blue skirt
+            reversecowgirl, Neo Tokyo alley way
             shirtlift, pink hoodie
 
             Instructions

@@ -51,6 +51,7 @@ agent_character = {}
 verbose = True
 
 def initialize_salesGPT_agent(character):
+    llm = customChatLLM()
     newAgent=[]
     agent_character['character'] = character
     config_path = storage_url + character + '.txt'

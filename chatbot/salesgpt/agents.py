@@ -106,7 +106,7 @@ class SalesGPT(Chain, BaseModel):
     def create_image_prompt(self):
         image_options_str = "\n".join(
             [
-                f"{key} - {value['description']}\ninput: {', '.join(value['input'])}"
+                f"{key} - {value['description']}\ninput: {', '.join(value['input'])}\n"
                 for key, value in self.image_options.items()
             ]
         )

@@ -1,7 +1,14 @@
+import os
+from dotenv import find_dotenv, load_dotenv
 from langchain.llms.base import LLM
 from typing import Optional, List, Mapping, Any
 import requests
 from pydantic import BaseModel, Field
+
+
+load_dotenv(find_dotenv())
+
+HOST = os.environ["OB_API_HOST"]
 
 class HistoryModel(BaseModel):
     internal: List[List[str]] = []
@@ -16,7 +23,6 @@ class customChatLLM(LLM):
         return "custom"
 
     def _call(self, prompt: str, stop: Optional[List[str]] = None) -> str:
-        HOST = 'da64-136-143-53-249.ngrok-free.app'
         URI = f'http://{HOST}/api/v1/chat'
 
         request = {
@@ -24,7 +30,7 @@ class customChatLLM(LLM):
             'max_new_tokens': 300,
             'auto_max_new_tokens': False,
             'mode': 'chat',  # Valid options: 'chat', 'chat-instruct', 'instruct'
-            'character': 'LANA',
+            'character': 'LUNA',
             'instruction_template': 'Alpaca',  # Will get autodetected if unset
             # 'your_name': 'Idmon',
             # 'name1': 'Idmon', # Optional
@@ -103,7 +109,6 @@ class GenerateImageLLM(LLM):
         return "custom"
 
     def _call(self, prompt: str, stop: Optional[List[str]] = None) -> str:
-        HOST = 'da64-136-143-53-249.ngrok-free.app' #localhost:5000
         URI = f'http://{HOST}/api/v1/chat'
 
         request = {
