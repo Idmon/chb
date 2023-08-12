@@ -87,7 +87,7 @@ class SalesGPT(Chain, BaseModel):
     @staticmethod
     def parse_output2(output_str):
         parts = [part.strip() for part in output_str.split(',')]
-        key = parts[0]
+        key = parts[0].strip().replace(" ", "")
         values = parts[1:]
         return {key: values}
 
