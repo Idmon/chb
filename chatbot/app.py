@@ -1,4 +1,5 @@
 import os
+import re
 import sys
 import time
 import json
@@ -354,7 +355,8 @@ def webhook():
                     thread = threading.Thread(target=non_blocking_operations, args=(phone_number,))
                     thread.start()
                 else:
-                    send_message(phone_number, answer)
+                    cleam_llm_ouput = re.sub(r'<IMAGE>|<IMAGE_READY>|SYSTEM:', '', answer).strip()
+                    send_message(phone_number, cleam_llm_ouput)
 
         return 'OK', 200
 

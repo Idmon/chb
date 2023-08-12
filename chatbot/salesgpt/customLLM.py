@@ -30,7 +30,7 @@ class customChatLLM(LLM):
             'max_new_tokens': 300,
             'auto_max_new_tokens': False,
             'mode': 'chat',  # Valid options: 'chat', 'chat-instruct', 'instruct'
-            'character': 'LUNAv2',
+            'character': 'LUNAv4',
             'instruction_template': 'Alpaca',  # Will get autodetected if unset
             # 'your_name': 'Idmon',
             # 'name1': 'Idmon', # Optional
