@@ -342,13 +342,13 @@ def webhook():
                     generate_image(image_prompt)
                     agent_character['agent'].system_step("<IMAGE_READY>")
                     answer = agent_character['agent'].step()
-                    answer = answer.replace("<IMAGE>", "")
+                    answer = answer.replace("<END_IMAGE>", "")
                     send_image(phone_number, "https://gf-bot.azurewebsites.net/image.png")
                     send_message(phone_number, answer)
 
 
-                if '<PROCESS_IMAGE>' in answer:
-                    answer = answer.replace("<PROCESS_IMAGE>", "")
+                if '<IMAGE>' in answer:
+                    #answer = answer.replace("<IMAGE>", "")
                     send_message(phone_number, answer)
 
                     # Start the non-blocking operations in a separate thread

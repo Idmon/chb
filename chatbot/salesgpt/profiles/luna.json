@@ -40,7 +40,7 @@
     "standingnaked": {
       "description": "nsfw erotic photo, standing naked, {outfit} photo, based on {location}",
       "input": ["location", "outfit"],
-      "prompt": "({location}), wearing {clothing} porno, nfsw, sex, coitus, photo of onlyfans girl, young woman, hasselblad H6D, natural lighting, oiled pale skin, long eye lashes, detailed skin texture, (blush:0.5), (goosebumps:0.5), subsurface scattering, RAW candid cinema, remarkable color, ultra realistic, textured skin,  realistic dull skin noise, visible skin detail, skin fuzz, dry skin, shot with cinematic camera, best composition, profesional color graded, realistic skin detail, re-touched, Enchanting sexyness",
+      "prompt": "({location}), wearing {outfit} porno, nfsw, sex, coitus, photo of onlyfans girl, young woman, hasselblad H6D, natural lighting, oiled pale skin, long eye lashes, detailed skin texture, (blush:0.5), (goosebumps:0.5), subsurface scattering, RAW candid cinema, remarkable color, ultra realistic, textured skin,  realistic dull skin noise, visible skin detail, skin fuzz, dry skin, shot with cinematic camera, best composition, profesional color graded, realistic skin detail, re-touched, Enchanting sexyness",
       "negative_prompt": "watermark, (deformed iris, deformed pupils, semi-realistic, cgi, 3d, render, sketch, cartoon, drawing, anime, mutated hands and fingers:1.4), (deformed, distorted, disfigured:1.3), poorly drawn, bad anatomy, wrong anatomy, extra limb, missing limb, floating limbs, disconnected limbs, mutation, mutated, ugly, disgusting, amputation"
     },
     "lingerie": {
@@ -61,7 +61,7 @@
       "prompt": "lebanese girl, long brown hair, beautiful face, (small perky breasts), fullbody, symmetric eyes, Hasselblad H6, Masterpiece, absurdres,HDR,8k,excited,smirking,best quality,  hentai ropebondage, bdsm, {color} crotch rope, bound legs,breast bondage, bound arms , hand up, ahegao, spread legs, ({location}:1.2)   <lora:bondageplay:0.8>",
       "negative_prompt": "big breast, (low quality, worst quality:1.4), ((disfigured)), ((bad art)), ((deformed)),((extra limbs)),((close up)),((b&w)), wierd colors, blurry, (((duplicate))), ((morbid)), ((mutilated)), [out of frame], (((extra fingers, mutated hands))), ((poorly drawn hands)), ((poorly drawn face)), (((mutation))), (((deformed))), ((ugly)), blurry, ((bad anatomy)), (((bad proportions))), ((extra limbs)), cloned face, (((disfigured))), out of frame, ugly, extra limbs, (bad anatomy), gross proportions, (malformed limbs), ((missing arms)), ((missing legs)), (((extra arms))), (((extra legs))), mutated hands, (fused fingers), (too many fingers), (((long neck))), Photoshop, video game, ugly, tiling, poorly drawn hands, poorly drawn feet, poorly drawn face, out of frame, mutation, mutated, extra limbs, extra legs, extra arms, disfigured, deformed, cross-eye, body out of frame, blurry, bad art, bad anatomy,(((UGLY DEFORMED HANDS))),(((holding, bag, purse))),(((elf ears)))"
     },
-    "doggystyleFront": {
+    "doggystylefront": {
       "description": "front view doggystyle, doggy, doggy style, sex from behind, based on {location}",
       "input": ["location"],
       "prompt": "best quality, beautiful, 23-year-old Lebanese girl, long brown hair, frontdoggy, 1girl, 1boy, breasts, nipples, hetero, sex, sex from behind, all fours, doggystyle, ({location}:1.2) <lora:doggystylefront:1>",
@@ -104,9 +104,9 @@
       "negative_prompt": "extra fingers, fewer fingers, missing fingers, extra digit, fewer digits, ng_deepnegative_v1_75t, hairy, pubic hair, head cut off, EasyNegative, paintings, sketches, (worst quality:2), (low quality:2), (normal quality:2), ((monochrome)), ((grayscale)), skin spots, acnes, skin blemishes, age spot, glans, ((watermark:2)),(white letters:1), (multi nipples), text, error, cropped, jpeg artifacts, signature, watermark, username, bad feet, Multiple people, mutation, deformed, long neck, cross-eyed, mutated hands, extra hands, bad body, bad proportions, missing legs, missing limbs, deformed legs, cut off legs, bad anatomy, polar lowres, bad proportions, gross proportions, abdominal stretch, glans, pants, briefs, knickers, kecks, fused fingers"
     },
     "pussyfrombelow": {
-      "description": "standing, showing pussy from below, {clothing} is either skirt, short dress, hotpants or nude",
-      "input": ["clothing"],
-      "prompt": "best quality, beautiful, 23-year-old Lebanese girl, long brown hair, {clothing} (from below, looking down), front view, pussy visible, showing pussy, wide hips, pussy focus, pussy close-up, (low angle) <lora:POVpussyfrombelow:0.7>",
+      "description": "standing, showing pussy from below, {outfit} is either skirt, short dress, hotpants or nude",
+      "input": ["outfit"],
+      "prompt": "best quality, beautiful, 23-year-old Lebanese girl, long brown hair, {outfit} (from below, looking down), front view, pussy visible, showing pussy, wide hips, pussy focus, pussy close-up, (low angle) <lora:POVpussyfrombelow:0.7>",
       "negative_prompt": "(deformed iris, deformed pupils, semi-realistic, cgi, 3d, render, sketch, cartoon, drawing, anime, mutated hands and fingers:1.4), (deformed, distorted, disfigured:1.3), poorly drawn, bad anatomy, wrong anatomy, extra limb, missing limb, floating limbs, disconnected limbs, mutation, mutated, ugly, disgusting, amputation"
     },
     "missionaryvaginal": {
@@ -130,7 +130,7 @@
     "cowgirl": {
       "description": "cowgirl position, based on {location}",
       "input": ["location"],
-      "prompt": "beautiful, masterpiece, best quality, extremely detailed face, perfect lighting, lebanese 1girl, long brown hair, solo, 1boy, penis, squatting cowgirl position, vaginal, pov, squatting, looking at viewer ({location}:1.2), <lora:cowgirl:1>",
+      "prompt": "beautiful, masterpiece, best quality, extremely detailed face, perfect lighting, lebanese 1girl, long brown hair, solo, 1boy, penis, squatting cowgirl position, vaginal, pov, squatting, looking at viewer ({location}:1.17), <lora:cowgirl:1>",
       "negative_prompt": "watermark, (deformed iris, deformed pupils, semi-realistic, cgi, 3d, render, sketch, cartoon, drawing, anime, mutated hands and fingers:1.4), (deformed, distorted, disfigured:1.3), poorly drawn, bad anatomy, wrong anatomy, extra limb, missing limb, floating limbs, disconnected limbs, mutation, mutated, ugly, disgusting, amputation"
     },
     "reversecowgirl": {
@@ -140,9 +140,9 @@
       "negative_prompt": "watermark, (deformed iris, deformed pupils, semi-realistic, cgi, 3d, render, sketch, cartoon, drawing, anime, mutated hands and fingers:1.4), (deformed, distorted, disfigured:1.3), poorly drawn, bad anatomy, wrong anatomy, extra limb, missing limb, floating limbs, disconnected limbs, mutation, mutated, ugly, disgusting, amputation"
     },
     "shirtlift": {
-      "description": "lifting shirt, flashing boobs, holding upperbody {clothing} item with hands up, based on {location}",
-      "input": ["location", "clothing"],
-      "prompt": "best quality, beautiful, 23-year-old Lebanese girl, long brown hair,  shirtlift, (clothing), ({location}:1.2) <lora:shirtlift:0.8>",
+      "description": "lifting shirt, flashing boobs, holding upperbody {outfit} item with hands up, based on {location}",
+      "input": ["location", "outfit"],
+      "prompt": "best quality, beautiful, 23-year-old Lebanese girl, long brown hair,  shirtlift, (outfit), ({location}:1.2) <lora:shirtlift:0.8>",
       "negative_prompt": "(deformed iris, deformed pupils, semi-realistic, cgi, 3d, render, sketch, cartoon, drawing, anime, mutated hands and fingers:1.4), (deformed, distorted, disfigured:1.3), poorly drawn, bad anatomy, wrong anatomy, extra limb, missing limb, floating limbs, disconnected limbs, mutation, mutated, ugly, disgusting, amputation"
     },
     "legsup": {
