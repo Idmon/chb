@@ -39,6 +39,8 @@ WHATSAPP_API_KEY = os.environ["WHATSAPP_API_KEY"]
 WHATSAPP_BOT_ID = os.environ["WHATSAPP_BOT_ID"]
 SD_API_HOST = os.environ["SD_API_HOST"]
 
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
 
 # Initialize SalesGPT
 #llm = ChatOpenAI(temperature=0.7, model_name="gpt-3.5-turbo-0613") #model_name="gpt-4"
@@ -229,7 +231,14 @@ def get_face(url):
 
 def generate_image(image_instructions):
 
-    prompt, negPrompt, face =  agent_character['agent'].construct_prompt(image_instructions)
+    result = agent_character['agent'].construct_prompt(image_instructions)
+
+    if result is None:
+        logger.error("Failed to construct prompt from image instructions: " + str(image_instructions))
+        return  # You might decide to handle this case differently. Maybe you want to raise an exception, retry, or return a default value.
+    
+    prompt, negPrompt, face = result
+
     logger.info("Image Instructions: " + str(image_instructions))
 
     base64_face = get_face(face)
@@ -242,6 +251,14 @@ def generate_image(image_instructions):
         'CodeFormer', #4 Restore Face: None; CodeFormer; GFPGAN
         1, #5 Restore visibility value
         True, #7 Restore face -> Upscale
+        'None', #8 Upscaler (type 'None' if doesn't need), see full list here: http://127.0.0.1:7860/sdapi/v1/script-info -> reactor -> sec.8
+        1, #9 Upscaler scale value
+        1, #10 Upscaler visibility (if scale = 1)
+        False, #11 Swap in source image
+        True, #12 Swap in generated image
+        1, #13 Console Log Level (0 - min, 1 - med or 2 - max)
+        0, #14 Gender Detection (Source) (0 - No, 1 - Female Only, 2 - Male Only)
+        1, #15 Gender Detection (Target) (0 - No, 1 - Female Only, 2 - Male Only)
     ]
 
     # url = "https://api.runpod.ai/v2/shhdv5w58hhanm/runsync"
@@ -257,11 +274,11 @@ def generate_image(image_instructions):
         "num_outputs": 1,
         "prompt_strength": 1,
         "scheduler": "DPM++ 2M Karras",
-        # "enable_hr": True,
+        "enable_hr": True,
         "denoising_strength": 0.3,
-        # "hires_upscale": 1.25,
-        # "hires_upscaler": "superscale",
-        # "hires_steps": 30,
+        "hr_upscale": 1.25,
+        "hr_upscaler": "superscale",
+        "hr_steps": 30,
         "alwayson_scripts": {
             "reactor":{
                 "args":args
@@ -285,7 +302,7 @@ def generate_image(image_instructions):
     logger.info("Image downloaded" + base64_image_data[:50])
 
     # Save path for the image
-    save_path = 'static/image.png'
+    save_path = os.path.join(BASE_DIR, 'static', 'image.png')
 
     # Call the function to save the base64 image data as an actual image
     save_base64_as_image(base64_image_data, save_path)

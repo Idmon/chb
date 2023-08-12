@@ -10,7 +10,7 @@ from langchain.chains.base import Chain
 from langchain.llms import BaseLLM
 from pydantic import BaseModel, Field
 
-from salesgpt.chains import SalesConversationChain, StageAnalyzerChain, ImagePromptAnalyzerChain, ChatAnalyzerChain
+from salesgpt.chains import SalesConversationChain, StageAnalyzerChain, ImagePromptAnalyzerChain, ChatAnalyzerChain, ConversationAnalyzerChain
 from salesgpt.logger import time_logger
 from salesgpt.parsers import SalesConvoOutputParser
 from salesgpt.prompts import SALES_AGENT_TOOLS_PROMPT
@@ -30,6 +30,7 @@ class SalesGPT(Chain, BaseModel):
     conversation_stage_id: str = "1"
     stage_analyzer_chain: StageAnalyzerChain = Field(...)
     image_analyzer_chain: ImagePromptAnalyzerChain = Field(...)
+    conversation_analyzer_chain: ConversationAnalyzerChain = Field(...)
     chat_analyzer_chain: ChatAnalyzerChain = Field(...)
     sales_agent_executor: Union[AgentExecutor, None] = Field(...)
     knowledge_base: Union[RetrievalQA, None] = Field(...)
@@ -96,28 +97,48 @@ class SalesGPT(Chain, BaseModel):
             if key in self.image_options:
                 prompt = self.image_options[key]['prompt']
                 negPrompt = self.image_options[key]['negative_prompt']
+                
+                input_fields = self.image_options[key]['input']
+                
+                # If image_instructions has more values than input_fields, prune them.
+                values = values[:len(input_fields)]
+                
+                # If image_instructions has fewer values than input_fields, fill in with empty strings.
+                while len(values) < len(input_fields):
+                    values.append("")
+                
                 for idx, value in enumerate(values):
-                    placeholder = "{" + self.image_options[key]['input'][idx] + "}"
+                    placeholder = "{" + input_fields[idx] + "}"
                     prompt = prompt.replace(placeholder, value)
+                    print(prompt)
+                
                 return prompt, negPrompt, self.face
+
+        # If the loop completes without returning, then return None.
         return None
+
 
     @time_logger
     def create_image_prompt(self):
+        last_messages = "\n".join(self.conversation_history[-10:]).rstrip("\n")
+        conversationContext = self.conversation_analyzer_chain.run(
+            conversation_history=last_messages,
+        )
+
         image_options_str = "\n".join(
             [
-                f"{key} - {value['description']}\ninput: {', '.join(value['input'])}\n"
+                f"{key} [{', '.join(value['input'])}]" if value['input'] else key
                 for key, value in self.image_options.items()
             ]
         )
 
-        last_messages = "\n".join(self.conversation_history[-10:]).rstrip("\n")
         image_prompt = self.image_analyzer_chain.run(
-            conversation_history=last_messages,
-            image_options=image_options_str
-        )
-        logger.info(f"Prompt from LLM: {image_prompt}")
+            image_options=image_options_str,
+            conversation_context=conversationContext
+        ).lower()
+        logger.info(f"Output from LLM: {image_prompt}")
         image_instructions = self.parse_output2(image_prompt)
+        logger.info(f"Parsed prompt instructions: {image_prompt}")
 
         return image_instructions
 
@@ -285,6 +306,7 @@ class SalesGPT(Chain, BaseModel):
         stage_analyzer_chain = StageAnalyzerChain.from_llm(llm, verbose=verbose)
         llmImage = GenerateImageLLM()
         image_analyzer_chain = ImagePromptAnalyzerChain.from_llm(llmImage, verbose=verbose)
+        conversation_analyzer_chain = ConversationAnalyzerChain.from_llm(llmImage, verbose=verbose)
         chat_analyzer_chain = ChatAnalyzerChain.from_llm(llm, verbose=verbose)
         if (
             "use_custom_prompt" in kwargs.keys()
@@ -364,6 +386,7 @@ class SalesGPT(Chain, BaseModel):
         )
 
         return cls(
+            conversation_analyzer_chain=conversation_analyzer_chain,
             chat_analyzer_chain=chat_analyzer_chain,
             conversation_stages=conversation_stages,
             conversation_stage_dict=conversation_stage_dict,

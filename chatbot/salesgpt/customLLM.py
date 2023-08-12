@@ -30,7 +30,7 @@ class customChatLLM(LLM):
             'max_new_tokens': 300,
             'auto_max_new_tokens': False,
             'mode': 'chat',  # Valid options: 'chat', 'chat-instruct', 'instruct'
-            'character': 'LUNA',
+            'character': 'LUNAv2',
             'instruction_template': 'Alpaca',  # Will get autodetected if unset
             # 'your_name': 'Idmon',
             # 'name1': 'Idmon', # Optional
@@ -135,7 +135,7 @@ class GenerateImageLLM(LLM):
 
             # Generation params. If 'preset' is set to different than 'None', the values
             # in presets/preset-name.yaml are used instead of the individual numbers.
-            'preset': 'None',
+            'preset': 'simple-1',
             'do_sample': True,
             'temperature': 0.7,
             'top_p': 0.1,
