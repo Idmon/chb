@@ -1,4 +1,5 @@
 import os
+import re
 from dotenv import find_dotenv, load_dotenv
 from langchain.llms.base import LLM
 from typing import Optional, List, Mapping, Any
@@ -18,11 +19,33 @@ class customChatLLM(LLM):
 
     history: HistoryModel = HistoryModel(internal=[], visible=[])
 
+    @staticmethod
+    def transform_to_history_model(conversation_history: List[str]) -> HistoryModel:
+
+        def clean_visible_item(item: str) -> str:
+            # Remove any string that starts with <, contains text, and ends with >
+            item = re.sub(r'<[^>]+>', '', item)
+            # Replace specific message to an empty string
+            if item == "SYSTEM: <IMAGE_READY>":
+                return ""
+            return item
+
+        transformed_data = {
+            'internal': [[item] for item in conversation_history],
+            'visible': [[clean_visible_item(item)] for item in conversation_history]
+        }
+
+        return HistoryModel(**transformed_data)
+
     @property
     def _llm_type(self) -> str:
         return "custom"
 
-    def _call(self, prompt: str, stop: Optional[List[str]] = None) -> str:
+    def _call(self, prompt: str, conversation_history: List[str], stop: Optional[List[str]] = None) -> str:
+
+        history = customChatLLM.transform_to_history_model(conversation_history)
+        print(history)
+        
         URI = f'https://{HOST}/api/v1/chat'
 
         request = {
@@ -90,16 +113,14 @@ class customChatLLM(LLM):
         response.raise_for_status()
 
         result = response.json()
-        
-        # Update the history attribute with the returned history
-        self.history = HistoryModel(**result['results'][0]['history'])
 
-        return result['results'][0]['history']['visible'][-1][1]
+        ## dirty hack (needs to be fixed in API with stopping string)
+        result = result['results'][0]['history']['visible'][-1][1]
+        result = result.split('<END_OF_TURN>')
+        result = result[0].strip()
+        ## end dirty hack
 
-    @property
-    def _identifying_params(self) -> Mapping[str, Any]:
-        """Get the identifying parameters."""
-        return {}
+        return result
 
 
 class GenerateImageLLM(LLM):
