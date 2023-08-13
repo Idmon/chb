@@ -121,21 +121,21 @@ class SalesGPT(Chain, BaseModel):
     @time_logger
     def create_image_prompt(self):
         last_messages = "\n".join(self.conversation_history[-10:]).rstrip("\n")
-        conversationContext = self.conversation_analyzer_chain.run(
+        image_prompt = self.conversation_analyzer_chain.run(
             conversation_history=last_messages,
-        )
-
-        image_options_str = "\n".join(
-            [
-                f"{key} [{', '.join(value['input'])}]" if value['input'] else key
-                for key, value in self.image_options.items()
-            ]
-        )
-
-        image_prompt = self.image_analyzer_chain.run(
-            image_options=image_options_str,
-            conversation_context=conversationContext
         ).lower()
+
+        # image_options_str = "\n".join(
+        #     [
+        #         f"{key} [{', '.join(value['input'])}]" if value['input'] else key
+        #         for key, value in self.image_options.items()
+        #     ]
+        # )
+
+        # image_prompt = self.image_analyzer_chain.run(
+        #     image_options=image_options_str,
+        #     conversation_context=conversationContext
+        # ).lower()
         logger.info(f"Output from LLM: {image_prompt}")
         image_instructions = self.parse_output2(image_prompt)
         logger.info(f"Parsed prompt instructions: {image_prompt}")
