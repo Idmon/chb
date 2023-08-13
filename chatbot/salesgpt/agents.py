@@ -120,7 +120,7 @@ class SalesGPT(Chain, BaseModel):
 
     @time_logger
     def create_image_prompt(self):
-        last_messages = "\n".join(self.conversation_history[-10:]).rstrip("\n")
+        last_messages = "\n".join(self.conversation_history[-30:]).rstrip("\n")
         image_prompt = self.conversation_analyzer_chain.run(
             conversation_history=last_messages,
         ).lower()
